@@ -31,10 +31,6 @@ public class SpeechTweet extends Activity {
 	
 	private final static int ACTIVITY_RESULT_OAUTH = 0;
 
-    private final static String OAUTH_CONSUMER_KEY = "1arPy9XRk1A9dLQHGHJIHg";
-    private final static String OAUTH_CONSUMER_SECRET = "qDwteoskKT0S8csAfXQtHthmHix16UhoW8txdCxQs";
-    public final static String OAUTH_CALLBACK_URL = "http://koujitaro.hekatoncheir.net/speech_to_tweet/";
-    
 	private Handler mHandler = new Handler();
 	
     private Twitter mTwitter;
@@ -58,9 +54,9 @@ public class SpeechTweet extends Activity {
         mIsOpenOAuth = false;
         mIsVerifyCredentials = false;
         
-        mOAuthConsumerKey = OAUTH_CONSUMER_KEY;
-        mOAuthConsumerSecret = OAUTH_CONSUMER_SECRET;
-        mOAuthCallbackURL = SpeechTweet.OAUTH_CALLBACK_URL;
+        mOAuthConsumerKey = getResources().getString(R.string.OAUTH_CONSUMER_KEY);
+        mOAuthConsumerSecret = getResources().getString(R.string.OAUTH_CONSUMER_SECRET);
+        mOAuthCallbackURL = getResources().getString(R.string.OAUTH_CALLBACK_URL);
         
     }
 	

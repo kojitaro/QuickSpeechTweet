@@ -21,7 +21,7 @@ public class OAuthActivity extends Activity
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        mOAuthCallbackURL = SpeechTweet.OAUTH_CALLBACK_URL;
+        mOAuthCallbackURL = getResources().getString(R.string.OAUTH_CALLBACK_URL);
         
         mIsFinish = false;
         
