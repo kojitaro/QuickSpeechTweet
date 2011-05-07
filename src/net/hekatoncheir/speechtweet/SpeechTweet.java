@@ -59,6 +59,7 @@ public class SpeechTweet extends Activity {
 	SpeechRecognizer mSpeechRecognizer = null;
 	
 	private boolean mIsVerifyCredentials;
+	AlertDialog mMessageDialog;
 	MediaPlayer mRingPlayer;
 	
     @Override
@@ -80,7 +81,8 @@ public class SpeechTweet extends Activity {
     	super.onStart();
     	
     	Log.d(TAG, "onStart");
-    	
+		showMessage(R.string.message_initialize);
+  	
     	if( mIsOpenOAuth ){
     		mIsOpenOAuth = false;
     		return;
@@ -122,6 +124,7 @@ public class SpeechTweet extends Activity {
 	private void startRecognize(final boolean isRetry)
 	{
 		finalizeSpeechRecognizer();
+		showMessage(R.string.message_lets_tweet);
 
 		MediaPlayer mp;
 		if( isRetry ){
@@ -229,6 +232,11 @@ public class SpeechTweet extends Activity {
         });
         
         Intent intent = RecognizerIntent.getVoiceDetailsIntent(this);
+        if( intent == null){
+        	showError("Speech Recognizer is required.");
+        	mSpeechRecognizer = null;
+        	return;
+        }
         mSpeechRecognizer.startListening(intent);
         
     }
@@ -261,6 +269,7 @@ public class SpeechTweet extends Activity {
 			}
 		});
 		mRingPlayer.start();
+		showMessage(R.string.message_ring);
 		
 			
 		TwitterFactory factory = new TwitterFactory(cb.build());
@@ -418,7 +427,25 @@ public class SpeechTweet extends Activity {
 			}
 		});
 		mp.start();
+		showMessage(R.string.message_complete);
 	}
+	
+	// Show Dialog
+	private void showMessage(int message)
+	{
+		if( mMessageDialog != null){
+			mMessageDialog.cancel();
+			mMessageDialog = null;
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(this)
+			.setTitle(getResources().getString(R.string.app_name))
+			.setMessage(getResources().getString(message))
+            ;
+		 mMessageDialog = builder.create();
+		 mMessageDialog.show();
+	}
+	
+	// Show ErrorDialog
 	private void showError(String message)
 	{
 		MediaPlayer mp = MediaPlayer.create(this, R.raw.error);

@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">QuickSpeechTweet</string>
+    <string name="message_initialize">Initializing..</string>
+    <string name="message_ring">Calling..</string>
+    <string name="message_lets_tweet">Connected.</string>
+    <string name="message_complete">Completed</string>
+    
 </resources>
